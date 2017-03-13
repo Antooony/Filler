@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 18:38:42 by adenis            #+#    #+#             */
-/*   Updated: 2017/03/08 16:23:06 by adenis           ###   ########.fr       */
+/*   Updated: 2017/03/13 12:04:50 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int		get_player(void)
 	char	*s;
 
 	i = 0;
-	if (get_next_line(0, &s) < 0)
-		exit (0);
+	read_line(&s);
 	while (s[i] && !ft_isdigit(s[i]))
 		i++;
 	i = s[i] - '0';
@@ -33,8 +32,6 @@ void		get_gsize(t_fig *st)
 	char	*y;
 	char	*x;
 
-	if (st->line[0] != 'P')
-		exit(0);
 	cut = ft_strchr(st->line, ' ') + 1;
 	x = ft_strsub(cut, ft_strchr(cut, ' ') - cut, ft_strchr(cut, ':') - cut - 1);
 	y = ft_strsub(cut, 0, ft_strchr(cut, ' ') - cut);
@@ -60,7 +57,8 @@ void		get_psize(t_fig *st)
 	st->py = ft_atoi(y);
 	ft_strdel(&y);
 	ft_strdel(&x);
-	ft_strdel(&st->line);
+	if (st->line)
+		ft_strdel(&st->line);
 }
 
 char	*parse_grid(char *s)

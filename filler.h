@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 13:55:00 by adenis            #+#    #+#             */
-/*   Updated: 2017/03/08 18:40:05 by adenis           ###   ########.fr       */
+/*   Updated: 2017/03/13 16:40:46 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ typedef	struct	s_fig
 	int		player;
 	int		bitch;
 }				t_fig;
+
+void		read_line(char **s);
+void		reg_search(t_fig *st);
+void		rev_search(t_fig *st);
 
 void		test_target2(t_fig *st);
 void		test_target(t_fig *st);
