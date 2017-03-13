@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graph.c                                            :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 17:13:39 by adenis            #+#    #+#             */
-/*   Updated: 2017/03/02 17:28:32 by adenis           ###   ########.fr       */
+/*   Created: 2016/11/09 17:32:20 by adenis            #+#    #+#             */
+/*   Updated: 2016/11/14 13:06:59 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-void	aff(char c)
+#include "libft.h"
+
+int		ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	if (c == 'O' || c == 'o')
-		ft_printf("\e[31m%c\e[0m", c);
-	else if (c == 'X' || c == 'x')
-		ft_printf("\e[34m%c\e[0m", c);
+	if (!s1 || !s2 || n == 0)
+		return (1);
+	if (ft_strncmp(s1, s2, n) == 0)
+		return (1);
 	else
-		ft_printf("%c", c);
-}
-
-int		main(void)
-{
-	char buff[2];
-
-	buff[1] = '\0';
-	while (read(0, buff, 1))
-		aff(buff[0]);
+		return (0);
 }

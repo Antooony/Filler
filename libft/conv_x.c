@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 10:54:39 by adenis            #+#    #+#             */
-/*   Updated: 2017/02/09 13:34:09 by adenis           ###   ########.fr       */
+/*   Updated: 2017/03/06 11:28:21 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ void				ft_convx(va_list ap)
 	if (g_arg.len)
 		ft_lenx(&str);
 	g_arg.ret += ft_strlen(str);
-	ft_putstr(str);
+	ft_putstr_fd(str, g_arg.fd);
 	ft_strdel(&str);
 }

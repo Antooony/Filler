@@ -6,11 +6,11 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 18:38:42 by adenis            #+#    #+#             */
-/*   Updated: 2017/03/02 17:08:36 by adenis           ###   ########.fr       */
+/*   Updated: 2017/03/08 16:23:06 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "../filler.h"
 
 int		get_player(void)
 {
@@ -40,6 +40,8 @@ void		get_gsize(t_fig *st)
 	y = ft_strsub(cut, 0, ft_strchr(cut, ' ') - cut);
 	st->gx = ft_atoi(x);
 	st->gy = ft_atoi(y);
+	TARX = st->gx / 2;
+	TARY = st->gy / 2;
 	ft_strdel(&y);
 	ft_strdel(&x);
 }

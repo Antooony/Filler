@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_u_s.c                                         :+:      :+:    :+:   */
+/*   conv_u.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:44:12 by adenis            #+#    #+#             */
-/*   Updated: 2017/02/09 15:42:57 by adenis           ###   ########.fr       */
+/*   Updated: 2017/03/06 11:25:53 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,22 @@ static void		ft_accu(char **str)
 		ft_memset(tmp, '0', (g_arg.acc - ft_strlen(*str)));
 		*str = ft_strjoinfree(tmp, *str);
 	}
+}
+
+void			ft_convu(va_list ap)
+{
+	char	*str;
+
+	ft_sizeu(ap, &str);
+	if (g_arg.vacc && !g_arg.acc && !ft_strcmp(str, "0"))
+		str[0] = '\0';
+	if (g_arg.vacc)
+		ft_accu(&str);
+	if (g_arg.len)
+		ft_lenu(&str);
+	g_arg.ret += ft_strlen(str);
+	ft_putstr_fd(str, g_arg.fd);
+	ft_strdel(&str);
 }
 
 void			ft_sconvu(va_list ap)

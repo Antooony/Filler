@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:44:12 by adenis            #+#    #+#             */
-/*   Updated: 2017/02/09 15:35:44 by adenis           ###   ########.fr       */
+/*   Updated: 2017/03/06 11:25:53 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			ft_convu(va_list ap)
 	if (g_arg.len)
 		ft_lenu(&str);
 	g_arg.ret += ft_strlen(str);
-	ft_putstr(str);
+	ft_putstr_fd(str, g_arg.fd);
 	ft_strdel(&str);
 }
 
