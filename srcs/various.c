@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:54:42 by adenis            #+#    #+#             */
-/*   Updated: 2017/03/08 16:15:03 by adenis           ###   ########.fr       */
+/*   Updated: 2017/03/14 12:12:28 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,6 @@ void		print(t_fig *st)
 		ft_fprintf(2, "%s\n", st->piece[i]);
 }
 
-void		printp(t_fig *st)
-{
-	int		i;
-
-	ft_fprintf(2, "Player = %p\n", st->player);
-	ft_fprintf(2, "GYMAX  = %p\n", st->gy);
-	ft_fprintf(2, "GXMAX  = %p\n", st->gx);
-	ft_fprintf(2, "PYMAX  = %p\n", st->py);
-	ft_fprintf(2, "PXMAX  = %p\n", st->px);
-	i = -1;
-	ft_fprintf(2, "GRID \n");
-	while (st->grid[++i])
-		ft_fprintf(2, "%p\n", st->grid[i]);
-	i = -1;
-	ft_fprintf(2, "PIECE \n");
-	while (st->piece[++i])
-		ft_fprintf(2, "%p\n", st->piece[i]);
-}
-
 void		free_tab(char **tab)
 {
 	int		i;
@@ -64,6 +45,47 @@ void		free_tab(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+void		clean(t_fig *st)
+{
+	st->nb = 0;
+	st->px = 0;
+	st->py = 0;
+	st->starty = 0;
+	st->startx = 0;
+	free(OX);
+	free(OY);
+}
+void	feedback(int x, int y, t_fig *st)
+{
+	t_fig	*new;
+
+	new = st_new();
+	LASTX = x;
+	LASTY = y;
+	ft_printf("%d %d\n", y, x);
+	clean(st);
+}
+
+void	get_target(t_fig *st, char *s2, int y)
+{
+	int		i;
+
+	i = 0;
+	while (i < (int)ft_strlen(GRID[y]))
+	{
+		if (GRID[y][i] != s2[i])
+		{
+			if (s2[i] == LETTER[st->bitch])
+			{
+				TARX = i;
+				TARY = y;
+				return ;
+			}
+		}
+		i++;
+	}
 }
 
 t_fig		*st_new(void)
