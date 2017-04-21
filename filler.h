@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 13:55:00 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/21 16:47:12 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/21 21:51:55 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,20 @@ typedef	struct	s_fig
 	int		bitch;
 }				t_fig;
 
+int				border_hit(t_fig *st);
 int				contact(t_fig *st);
+void			get_first(t_fig *st);
+int				is_first(t_fig *st);
+void			define_border(t_fig *st);
 
 void			read_line(char **s);
 int				reg_search(t_fig *st);
 int				rev_search(t_fig *st);
 
 int				filler(t_fig *st);
+int				distance(int x, int y, t_fig *st);
 void			get_target(t_fig *st, char *s2, int y);
-int				test_target2(t_fig *st);
 int				test_target(t_fig *st);
-void			printp(t_fig *st);
-void			print(t_fig *st);
 
 void			feedback(int x, int y, t_fig *st);
 void			update_grid(t_fig *st);

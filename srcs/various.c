@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:54:42 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/21 18:16:17 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/21 21:48:41 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_fig		*st_new(void)
 	new->bordery = 0;
 	new->starty = 0;
 	new->startx = 0;
-	new->player = 0;	
+	new->player = 0;
 	new->lastx = 0;
 	new->lasty = 0;
 	return (new);
