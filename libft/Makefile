@@ -6,7 +6,7 @@
 #    By: adenis <adenis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 16:45:23 by adenis            #+#    #+#              #
-#    Updated: 2017/03/06 11:31:29 by adenis           ###   ########.fr        #
+#    Updated: 2017/04/20 20:54:56 by adenis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CC				=	gcc
@@ -42,7 +42,6 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
-	@ranlib $(NAME)
 
 $(LIB):
 	@make -C $(LIB_PATH)

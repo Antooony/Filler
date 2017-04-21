@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 11:58:39 by adenis            #+#    #+#             */
-/*   Updated: 2017/03/14 12:06:15 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/21 16:33:36 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		target(t_fig *st, int i)
 	return (0);
 }
 
-void	test_target2(t_fig *st)
+int		test_target2(t_fig *st)
 {
 	int		i;
 
@@ -89,28 +89,68 @@ void	test_target2(t_fig *st)
 	while (i + PYMAX < GYMAX)
 	{
 		if (target2(st, i))
-		{
-			filler(st);
-			return ;
-		}
+			return (1);
 		i++;
 	}
-	reg_search(st);
+	return (reg_search(st));
 }
 
-void	test_target(t_fig *st)
-{
-	int		i;
+// int		test_target(t_fig *st)
+// {
+// 	int		i;
 
-	i = 1;
-	while (i + PYMAX < GYMAX)
+// 	i = 1;
+// 	while (i + PYMAX < GYMAX)
+// 	{
+// 		if (target(st, i))
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (reg_search(st));
+// }
+
+int		distance(int x, int y, t_fig *st)
+{
+	// ft_fprintf(2, "min = %d, max = %d res = %d\n", OX[0], PXMAX, (OX[0] + PXMAX) / 2);
+	x = x + (OX[0] + OX[PXMAX - 1]) / 2;
+	y = y + (OY[0] + OY[PYMAX - 1]) / 2;
+	return ((x - TARX) * (x - TARX) + (y - TARY) * (y - TARY));
+}
+
+void	test_it(t_fig *st, int x, int y)
+{
+	if (!piece_in(x, y, st))
+		return ;
+	if (distance(x, y, st) < distance(TESTX, TESTY, st))
 	{
-		if (target(st, i))
-		{
-			filler(st);
-			return ;
-		}
-		i++;
+		TESTX = x;
+		TESTY = y;
+	// ft_fprintf(2, "test_it\nx = %d, y = %d\n", TESTX, TESTY);
+	// sleep(2);
 	}
-	reg_search(st);
+}
+
+int		test_target(t_fig *st)
+{
+
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < GYMAX - 1)
+	{
+		x = 0;
+		while (x < GXMAX - 1)
+		{
+			test_it(st, x, y);
+			x++;
+		}
+		y++;
+	}
+	if (piece_in(TESTX, TESTY, st))
+	{
+		feedback(TESTX, TESTY, st);
+		return (1);
+	}
+	return (reg_search(st));
 }

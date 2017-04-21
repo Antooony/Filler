@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 15:05:48 by adenis            #+#    #+#             */
-/*   Updated: 2017/03/14 12:06:09 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/21 14:49:08 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,52 +36,52 @@ int		piece_in(int x, int y, t_fig *st)
 		return (0);
 }
 
-void	rev_search(t_fig *st)
+int		rev_search(t_fig *st)
 {
 	int		x;
 	int		y;
 
 	y = GYMAX - 1;
-		while (y)
+	while (y)
+	{
+		x = GXMAX;
+		while (x)
 		{
-			x = GXMAX;
-			while (x)
+			if (piece_in(x, y, st))
 			{
-				if (piece_in(x, y, st))
-				{
-					feedback(x, y, st);
-					filler(st);
-					return ;
-				}
-				x--;
+				feedback(x, y, st);
+				return (1);
 			}
-			y--;
+			x--;
 		}
+		y--;
+	}
 	feedback(0, 0, st);
+	return (0);
 }
 
-void	reg_search(t_fig *st)
+int		reg_search(t_fig *st)
 {
 	int		x;
 	int		y;
 
 	y = 0;
-		while (y + PYMAX < GYMAX)
+	while (y + PYMAX < GYMAX)
+	{
+		x = 0;
+		while (x + PXMAX < GXMAX)
 		{
-			x = 0;
-			while (x + PXMAX < GXMAX)
+			if (piece_in(x, y, st))
 			{
-				if (piece_in(x, y, st))
-				{
-					feedback(x, y, st);
-					filler(st);
-					return ;
-				}
-				x++;
+				feedback(x, y, st);
+				return (1);
 			}
-			y++;
+			x++;
 		}
+		y++;
+	}
 	feedback(0, 0, st);
+	return (0);
 }
 
 int		check_lines(int i, int y, t_fig *st)

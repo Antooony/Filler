@@ -6,7 +6,7 @@
 #    By: adenis <adenis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/24 16:01:35 by adenis            #+#    #+#              #
-#    Updated: 2017/03/14 11:59:43 by adenis           ###   ########.fr        #
+#    Updated: 2017/04/21 14:49:27 by adenis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ all : $(NAME)
 
 $(NAME) : $(OBJS) $(LIB)
 	@$(CC) $(FLAGS) $(SRC) $(LIB) -o $(NAME)
-	@$(CC) $(FLAGS) ./srcs/graph.c $(LIB) -o Graph
 
 $(LIB):
 	@make -C $(LIB_PATH)
@@ -42,7 +41,6 @@ clean :
 
 fclean : clean
 	@rm -f $(NAME)
-	@rm -f Graph
 	@make fclean -C ./libft
 
 re : fclean all
