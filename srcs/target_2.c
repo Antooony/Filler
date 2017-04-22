@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   target_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 16:29:53 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/22 12:26:09 by adenis           ###   ########.fr       */
+/*   Created: 2017/04/22 18:42:51 by adenis            #+#    #+#             */
+/*   Updated: 2017/04/22 18:45:01 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../filler.h"
 
-void	ft_strdel(char **as)
+int		distanceb(int x, int y, t_fig *st)
 {
-	if (as)
-	{
-		free(*as);
-		as = NULL;
-	}
+	x = x + (OX[0] + OX[PXMAX - 1]) / 2;
+	y = y + (OY[0] + OY[PYMAX - 1]) / 2;
+	return ((x - BX) * (x - BX) + (y - BY) * (y - BY));
+}
+
+void	define_tarb(t_fig *st)
+{
+	BY = TARY;
+	if (distance(0, TARY, st) < distance(TARX, GYMAX, st))
+		BX = 0;
+	else if (distance(GXMAX, TARY, st) < distance(TARX, GYMAX, st))
+		BX = GXMAX;
 }

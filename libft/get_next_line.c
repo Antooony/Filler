@@ -6,97 +6,126 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 19:20:47 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/19 20:40:47 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:14:58 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_line(char **line, char *rest)
+static size_t	copy_until_newline(char *dest, char *src, size_t len, char c)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
-	while (rest[i] != '\0' && rest[i] != '\n')
-		i++;
-	*line = ft_strsub(rest, 0, i);
-	return (*line);
+	if (!dest || !src)
+		return (i);
+	while (src[i	] != c && i < len)
+	{
+		dest[i] = src[i];
+		i += 1;
+	}
+	dest[i] = '\0';
+	return (i);
 }
 
-char	*ft_rest(char *rest)
+static char		*append_buffer(char *line, char *buffer)
 {
-	int		i;
-	int		j;
-	char	*tmp;
+	size_t	copied_len;
+	size_t	remaining_len;
+	char	temp[BUFF_SIZE + 1];
 
-	i = 0;
-	j = 0;
-	tmp = ft_strnew((int)ft_strlen(rest));
-	while (rest[i] != '\n' && rest[i] != '\0')
-		i++;
-	if (rest[i] == '\0')
-		tmp[0] = '\0';
+	copied_len = copy_until_newline(temp, buffer, ft_strlen(buffer), '\n');
+	if (ft_strlen(line) + copied_len >= MAX_LEN_LINE)
+		return (NULL);
+	remaining_len = ft_strlen(buffer) - copied_len;
+	if (copied_len == ft_strlen(buffer))
+		ft_strclr(buffer);
 	else
 	{
-		i++;
-		while (rest[i] != '\0')
-			tmp[j++] = rest[i++];
+		ft_memmove(buffer, ft_strchr(buffer, '\n') + 1, remaining_len);
+		ft_strclr(buffer + remaining_len);
 	}
-	return (tmp);
+	if (line[0] == 0)
+		ft_memcpy(line, temp, copied_len);
+	else
+		ft_strcat(line, temp);
+	return (line);
 }
 
-char	*ft_strjoinfreestyle(char const *s1, char const *s2)
+static t_list	*set_list(t_list **list, int fd, char *buffer)
 {
-	int		i;
-	int		j;
-	char	*d;
+	t_list	*current;
 
-	i = 0;
-	j = 0;
-	if (!(s1) || !(s2))
-		return (NULL);
-	if (!(d = (char *)malloc(sizeof(s1) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
-		return (NULL);
-	while (s1[i] != '\0')
-		d[j++] = s1[i++];
-	i = 0;
-	while (s2[i] != '\0')
-		d[j++] = s2[i++];
-	d[j] = '\0';
-	return (d);
+	current = NULL;
+	current = *list;
+	if (!current)
+	{
+		*list = NULL;
+		current = ft_lstnew(buffer, BUFF_SIZE + 1);
+		CUR_FD = fd;
+		*list = current;
+	}
+	if (current && (int)CUR_FD != fd)
+	{
+		while (current)
+		{
+			if ((int)CUR_FD == fd)
+				return (current);
+			current = current->next;
+		}
+		ft_lstadd(list, ft_lstnew(buffer, BUFF_SIZE + 1));
+		current = *list;
+		CUR_FD = fd;
+	}
+	return (current);
 }
 
-int		ft_bullshit(char *rest, char **line, int ret)
+static int		get_line(t_list *current, char *temp, char *buffer, char **line)
 {
-	if (rest[0] == '\0' && *line[0] == '\0' && ret == 0)
-		return (0);
+	int		ret;
+
+	ret = -1;
+	while (!(ft_strchr(CUR_BUFF, '\n')) && ret != 0)
+	{
+		if (ft_strlen(CUR_BUFF) > 0)
+		{
+			if (!(append_buffer(temp, CUR_BUFF)))
+				return (-1);
+		}
+		else
+		{
+			if ((ret = read(CUR_FD, buffer, BUFF_SIZE)) > 0)
+				buffer[ret] = '\0';
+			else if (ret == 0 && temp[0] == 0)
+				return (0);
+			else if (ret == -1)
+				return (-1);
+			ft_memcpy(CUR_BUFF, buffer, ret);
+		}
+	}
+	if (!(append_buffer(temp, CUR_BUFF)))
+		return (-1);
+	*line = ft_strdup(temp);
 	return (1);
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
-	int				ret;
-	static char		*rest;
-	char			buf[BUFF_SIZE + 1];
-	char			*tmp;
+	int				result;
+	char			temp[MAX_LEN_LINE];
+	char			buffer[BUFF_SIZE + 1];
+	static t_list	*list;
+	t_list			*current;
 
-	ret = 1;
-	if (rest == NULL)
-		rest = ft_strnew(0);
-	if (fd < 0 || !(line))
+	result = 0;
+	ft_bzero(buffer, BUFF_SIZE + 1);
+	ft_bzero(temp, MAX_LEN_LINE);
+	if (fd < 0 || BUFF_SIZE < 1 || !(current = set_list(&list, fd, buffer)))
 		return (-1);
-	while (ft_strchr(rest, '\n') == NULL && (ret = read(fd, buf, BUFF_SIZE)))
-	{
-		if (ret < 0)
-			return (-1);
-		else
-		{
-			buf[ret] = '\0';
-			rest = ft_strjoinfreestyle(rest, buf);
-		}
-	}
-	*line = ft_line(line, rest);
-	tmp = ft_strdup(rest);
-	rest = ft_rest(tmp);
-	return (ft_bullshit(rest, line, ret));
+	if ((result = get_line(current, temp, buffer, line)) == 1)
+		return (1);
+	else if (result == 0)
+		return (0);
+	else
+		return (-1);
 }

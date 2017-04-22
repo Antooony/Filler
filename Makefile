@@ -6,7 +6,7 @@
 #    By: adenis <adenis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/24 16:01:35 by adenis            #+#    #+#              #
-#    Updated: 2017/04/21 21:51:02 by adenis           ###   ########.fr        #
+#    Updated: 2017/04/22 18:43:29 by adenis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME			=	adenis.filler
 FLAGS			=	-Wall -Wextra -Werror
 
 SRC				=	main.c ./srcs/parsing.c ./srcs/place.c ./srcs/various.c \
-					./srcs/fill_st.c ./srcs/target_search.c ./srcs/border.c
+					./srcs/fill_st.c ./srcs/target_search.c ./srcs/border.c \
+					./srcs/checks.c ./srcs/target_2.c
 
 LIB				=	./libft/libft.a
 

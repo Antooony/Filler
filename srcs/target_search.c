@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 11:58:39 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/21 21:54:16 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/22 18:43:18 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	test_it(t_fig *st, int x, int y)
 		return ;
 	if (distance(x, y, st) < distance(TESTX, TESTY, st))
 	{
+		if ((contact(st) || border_hit(st)) && (GXMAX - BX < GXMAX / 5))
+		{
+			if (distanceb(x, y, st) > distanceb(TESTX, TESTY, st))
+				return ;
+		}
 		TESTX = x;
 		TESTY = y;
 	}
@@ -29,6 +34,7 @@ int		test_target(t_fig *st)
 	int		y;
 
 	y = 0;
+	define_tarb(st);
 	while (y < GYMAX - 1)
 	{
 		x = 0;

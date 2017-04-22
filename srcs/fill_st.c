@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:55:40 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/19 20:20:26 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/22 19:11:19 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	update_grid(t_fig *st)
 	while (i < GYMAX && get_next_line(0, &s) > 0)
 	{
 		tmp[i] = parse_grid(s);
+		s ? ft_strdel(&s) : NULL;
 		i++;
 	}
 	i = 0;
@@ -59,6 +60,7 @@ void	get_grid(t_fig *st)
 	while (i < GYMAX && get_next_line(0, &s) > 0)
 	{
 		GRID[i] = parse_grid(s);
+		s ? ft_strdel(&s) : NULL;
 		i++;
 	}
 }

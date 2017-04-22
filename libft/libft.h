@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:46:11 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/17 11:35:36 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:15:14 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define HEXAM "0123456789ABCDEF"
 # define OCTAL "01234567"
 # define BUFF_SIZE 100
+# define MAX_LEN_LINE 100000
+# define CUR_BUFF current->content
+# define CUR_FD current->content_size
 
 typedef struct s_list	t_list;
 struct					s_list

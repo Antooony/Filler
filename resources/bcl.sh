@@ -19,22 +19,18 @@ do
 				>&2 printf "p1 -- "
 				./resources/filler_vm -f ./resources/maps/$map -p1 ./adenis.filler -p2 \
 				./resources/players/$joueurs | ./score 1; 
-				sleep 1
 				printf "p2 -- "
 				>&2 printf "p2 -- "
-				./resources/filler_vm -f ./resources/maps/$map -p2 ./adenis.filler -p1 \
-				./resources/players/$joueurs | ./score 2; 
-				sleep 1
+				./resources/filler_vm -f ./resources/maps/$map -p1 ./adenis.filler -p2 \
+				./resources/players/$joueurs | ./score 1; 
 				printf "p1 -- "
 				>&2 printf "p1 -- "
 				./resources/filler_vm -f ./resources/maps/$map -p1 ./adenis.filler -p2 \
 				./resources/players/$joueurs | ./score 1; 
-				sleep 1
 				printf "p2 -- "
 				>&2 printf "p2 -- "
-				./resources/filler_vm -f ./resources/maps/$map -p2 ./adenis.filler -p1 \
-				./resources/players/$joueurs | ./score 2; 
-				sleep 1
+				./resources/filler_vm -f ./resources/maps/$map -p1 ./adenis.filler -p2 \
+				./resources/players/$joueurs | ./score 1; 
 				printf "p1 -- "
 				>&2 printf "p1 -- "
 				./resources/filler_vm -f ./resources/maps/$map -p1 ./adenis.filler -p2 \

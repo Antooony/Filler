@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 21:49:19 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/21 21:52:28 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/22 19:15:59 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,15 @@ int		border_hit(t_fig *st)
 		y++;
 	}
 	return (0);
+}
+
+void	last_clean(t_fig *st)
+{
+	if (FIG)
+		free_tab(FIG);
+	if (GRID)
+		free_tab(GRID);
+	if (st->line)
+		ft_strdel(&st->line);
+	free(st);
 }

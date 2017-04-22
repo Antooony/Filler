@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:54:42 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/21 21:48:41 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/22 16:51:09 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		free_tab(char **tab)
 	j = 0;
 	while (tab[j])
 		j++;
-	while (i < j)
+	while (i <= j)
 	{
 		if (tab[i])
 			ft_strdel(&tab[i]);
@@ -39,12 +39,14 @@ void		clean(t_fig *st)
 	st->py = 0;
 	TESTX = 0;
 	TESTY = 0;
+	BX = 0;
+	BY = 0;
+	OX ? free(OX) : NULL;
+	OY ? free(OY) : NULL;
 }
 
 void		feedback(int x, int y, t_fig *st)
 {
-	LASTX = x;
-	LASTY = y;
 	ft_putnbr(y);
 	ft_putchar(' ');
 	ft_putnbr(x);
@@ -96,7 +98,7 @@ t_fig		*st_new(void)
 	new->starty = 0;
 	new->startx = 0;
 	new->player = 0;
-	new->lastx = 0;
-	new->lasty = 0;
+	new->bx = 0;
+	new->by = 0;
 	return (new);
 }
