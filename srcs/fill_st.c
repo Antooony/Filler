@@ -6,13 +6,13 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:55:40 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/22 19:11:19 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/04 19:42:15 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../filler.h"
 
-void	update_grid(t_fig *st)
+int		update_grid(t_fig *st)
 {
 	char	**tmp;
 	int		i;
@@ -20,7 +20,8 @@ void	update_grid(t_fig *st)
 
 	i = 0;
 	s = NULL;
-	tmp = (char **)malloc(sizeof(char *) * GYMAX + 1);
+	if (!(tmp = (char **)malloc(sizeof(char *) * GYMAX + 1)))
+		return (0);
 	tmp[GYMAX] = NULL;
 	get_next_line(0, &s);
 	s ? ft_strdel(&s) : NULL;
@@ -31,17 +32,12 @@ void	update_grid(t_fig *st)
 		i++;
 	}
 	i = 0;
-	while (i < GYMAX)
-	{
-		if (ft_strcmp(GRID[i], tmp[i]))
-			get_target(st, tmp[i], i);
-		i++;
-	}
 	GRID ? free_tab(GRID) : NULL;
 	GRID = tmp;
+	return (1);
 }
 
-void	get_grid(t_fig *st)
+int		get_grid(t_fig *st)
 {
 	int		i;
 	char	*s;
@@ -49,11 +45,9 @@ void	get_grid(t_fig *st)
 	s = NULL;
 	i = 0;
 	if (GRID)
-	{
-		update_grid(st);
-		return ;
-	}
-	GRID = (char **)malloc(sizeof(char *) * GYMAX + 1);
+		return (update_grid(st));
+	if (!(GRID = (char **)malloc(sizeof(char *) * GYMAX + 1)))
+		return (0);
 	get_next_line(0, &s);
 	s ? ft_strdel(&s) : NULL;
 	GRID[GYMAX] = NULL;
@@ -63,6 +57,7 @@ void	get_grid(t_fig *st)
 		s ? ft_strdel(&s) : NULL;
 		i++;
 	}
+	return (1);
 }
 
 void	write_ox(t_fig *st)
@@ -112,14 +107,15 @@ int		count_stars(t_fig *st)
 	return (count);
 }
 
-void	get_ox(t_fig *st)
+int		get_ox(t_fig *st)
 {
 	int		j;
 
 	j = 0;
 	N = count_stars(st);
-	OX = (int *)malloc(sizeof(int) * N);
-	OY = (int *)malloc(sizeof(int) * N);
+	if (!(OX = (int *)malloc(sizeof(int) * N))
+		|| !(OY = (int *)malloc(sizeof(int) * N)))
+		return (0);
 	write_ox(st);
 	PYMAX = 0;
 	PXMAX = 0;
@@ -131,4 +127,5 @@ void	get_ox(t_fig *st)
 			PXMAX = OX[j];
 		j++;
 	}
+	return (1);
 }

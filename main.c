@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 13:53:51 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/22 19:17:08 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/04 19:36:25 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		read_in2(t_fig *st)
 	ret = 1;
 	if (FIG)
 		free_tab(FIG);
-	FIG = (char **)malloc(sizeof(char *) * PYMAX + 1);
+	if (!(FIG = (char **)malloc(sizeof(char *) * PYMAX + 1)))
+		return (0);
 	FIG[PYMAX] = NULL;
 	j = -1;
 	while (++j < PYMAX)
@@ -28,7 +29,7 @@ int		read_in2(t_fig *st)
 	if (ret)
 		ret = check_fig(st);
 	if (ret)
-		get_ox(st);
+		ret = get_ox(st);
 	return (ret);
 }
 
@@ -43,7 +44,8 @@ int		read_in(t_fig *st)
 	if (!GYMAX)
 		ret = get_gsize(st, s);
 	s ? ft_strdel(&s) : NULL;
-	get_grid(st);
+	if (!get_grid(st))
+		return (0);
 	if (ret)
 		ret = check_grid(st);
 	if (ret)
@@ -55,16 +57,12 @@ int		read_in(t_fig *st)
 
 int		filler(t_fig *st)
 {
+	st->score = 0;
 	if (!read_in(st))
 		return (-1);
-	if (is_first(st))
-		define_border(st);
-	if (!contact(st) && !border_hit(st))
-	{
-		TARX = st->borderx;
-		TARY = st->bordery;
-	}
-	return (test_target(st));
+	if (!TAB)
+		create_tab(st);
+	return (score_check(st));
 }
 
 int		main(void)
@@ -73,9 +71,12 @@ int		main(void)
 	int		i;
 
 	i = 0;
-	st = st_new();
+	if (!(st = st_new()))
+		return (0);
 	st->player = get_player();
-	st->bitch = get_bitch(st->player);
+	if (!st->player)
+		return (0);
+	st->adv = get_adv(st->player);
 	while (42)
 	{
 		if ((i = filler(st)) != 1)

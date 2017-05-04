@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 21:26:21 by adenis            #+#    #+#             */
-/*   Updated: 2017/02/09 13:35:01 by adenis           ###   ########.fr       */
+/*   Updated: 2017/04/23 15:51:45 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char		*ft_get_opt(char *str, int *i)
 	tmp = ft_strnew(0);
 	while (ft_strchr(OPT, str[j]))
 	{
-		if (!strchr(tmp, str[j]))
+		if (!ft_strchr(tmp, str[j]))
 			tmp = ft_strjoinfree(tmp, ft_strsub(&str[j], 0, 1));
 		j++;
 	}

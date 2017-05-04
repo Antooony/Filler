@@ -6,13 +6,13 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 18:38:21 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/22 18:45:35 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/01 17:13:52 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../filler.h"
 
-int		get_bitch(int p)
+int		get_adv(int p)
 {
 	if (p == 1)
 		return (2);

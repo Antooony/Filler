@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 18:38:42 by adenis            #+#    #+#             */
-/*   Updated: 2017/04/22 19:12:15 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/04 18:26:34 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,10 @@ int			get_player(void)
 
 int			get_gsize(t_fig *st, char *s)
 {
-	if (!strstr(s, "Plateau"))
+	if (!ft_strstr(s, "Plateau"))
 		return (0);
 	st->gx = ft_atoi(ft_strrchr(s, ' ') + 1);
 	st->gy = ft_atoi(ft_strchr(s, ' ') + 1);
-	TARX = st->gx / 2;
-	TARY = st->gy / 2;
 	return (1);
 }
 
@@ -47,7 +45,7 @@ int			get_psize(t_fig *st)
 	char	*s;
 
 	get_next_line(0, &s);
-	if (!strstr(s, "Piece"))
+	if (!ft_strstr(s, "Piece"))
 	{
 		s ? ft_strdel(&s) : NULL;
 		return (0);
