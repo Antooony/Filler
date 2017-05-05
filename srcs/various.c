@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:54:42 by adenis            #+#    #+#             */
-/*   Updated: 2017/05/04 19:48:40 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/05 18:37:01 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void		feedback(int x, int y, t_fig *st)
 	ft_putnbr(x);
 	ft_putchar('\n');
 	clean(st);
+	ft_fprintf(2, "\nMERCADI\n");
 }
 
 t_fig		*st_new(void)
@@ -96,5 +97,7 @@ t_fig		*st_new(void)
 	new->bx = 0;
 	new->by = 0;
 	new->score = 0;
+	new->padv = 0;
+	new->end = 0;
 	return (new);
 }

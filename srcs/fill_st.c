@@ -6,36 +6,11 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:55:40 by adenis            #+#    #+#             */
-/*   Updated: 2017/05/04 19:42:15 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/05 15:17:59 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../filler.h"
-
-int		update_grid(t_fig *st)
-{
-	char	**tmp;
-	int		i;
-	char	*s;
-
-	i = 0;
-	s = NULL;
-	if (!(tmp = (char **)malloc(sizeof(char *) * GYMAX + 1)))
-		return (0);
-	tmp[GYMAX] = NULL;
-	get_next_line(0, &s);
-	s ? ft_strdel(&s) : NULL;
-	while (i < GYMAX && get_next_line(0, &s) > 0)
-	{
-		tmp[i] = parse_grid(s);
-		s ? ft_strdel(&s) : NULL;
-		i++;
-	}
-	i = 0;
-	GRID ? free_tab(GRID) : NULL;
-	GRID = tmp;
-	return (1);
-}
 
 int		get_grid(t_fig *st)
 {
@@ -45,7 +20,7 @@ int		get_grid(t_fig *st)
 	s = NULL;
 	i = 0;
 	if (GRID)
-		return (update_grid(st));
+		free_tab(GRID);
 	if (!(GRID = (char **)malloc(sizeof(char *) * GYMAX + 1)))
 		return (0);
 	get_next_line(0, &s);

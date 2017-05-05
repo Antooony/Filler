@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:56:11 by adenis            #+#    #+#             */
-/*   Updated: 2017/05/04 19:48:11 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/05 18:33:20 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,38 @@ int		get_score(t_fig *st)
 	int		i;
 
 	i = 3;
-	while (!is_filled(st, i))
+	st->rot = 1;
+	while (st->rot)
 	{
 		fill_score(st, i);
 		i++;
 	}
 	return (count_score(st));
+}
+
+void	display_score(t_fig *st)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < GYMAX)
+	{
+		j = 0;
+		while (j < GXMAX)
+		{
+			if (TAB[i][j] == 0)
+				ft_fprintf(2, "%3d", TAB[i][j]);
+			else if (TAB[i][j] > 0)
+				ft_fprintf(2, "\e[32m%3d\e[0m", TAB[i][j]);
+			else if (TAB[i][j] < 0)
+				ft_fprintf(2, "\e[31m%3d\e[0m", TAB[i][j]);
+			
+			j++;
+		}
+		ft_fprintf(2, "\n");
+		i++;
+	}
 }
 
 void	score(t_fig *st, int x, int y)
@@ -59,6 +85,7 @@ void	score(t_fig *st, int x, int y)
 		BY = y;
 		st->score = get_score(st);
 	}
+	display_score(st);
 }
 
 int		score_check(t_fig *st)

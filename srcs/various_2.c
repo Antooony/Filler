@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 19:36:17 by adenis            #+#    #+#             */
-/*   Updated: 2017/05/04 19:48:36 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/05 15:28:10 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,30 @@ void			last_clean(t_fig *st)
 	free(st);
 }
 
+void			count_padv(t_fig *st)
+{
+	int		x;
+	int		y;
+	int		i;
+
+	y = 0;
+	i = 0;
+	while (y < GYMAX)
+	{
+		x = 0;
+		while (x < GXMAX)
+		{
+			if (GRID[y][x] == LETTER[st->adv])
+				 i++;
+			x++;
+		}
+		y++;
+	}
+	if (PADV == i)
+		END = 1;
+	PADV = i;
+}
+
 void			init_tab(t_fig *st)
 {
 	int		x;
@@ -56,7 +80,7 @@ void			init_tab(t_fig *st)
 			else if (GRID[y][x] == LETTER[st->adv])
 				TAB[y][x] = -2;
 			else
-				TAB[y][x] = 127;
+				TAB[y][x] = 1;
 			x++;
 		}
 		y++;

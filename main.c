@@ -6,11 +6,40 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 13:53:51 by adenis            #+#    #+#             */
-/*   Updated: 2017/05/04 19:36:25 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/05 15:30:38 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+int		go_hard(t_fig *st)
+{
+	int		x;
+	int		y;
+	int		in;
+
+	y = 0;
+	BX = 0;
+	BY = 0;
+	in = 0;
+	while (y + PYMAX < GYMAX)
+	{
+		x = 0;
+		while (x + PXMAX < GXMAX)
+		{
+			if (piece_in(x, y, st) && (in = 1))
+			{
+				feedback(x, y, st);
+				break ;
+			}
+			x++;
+		}
+		y++;
+	}
+	if (!in)
+		return (0);
+	return (1);
+}
 
 int		read_in2(t_fig *st)
 {
@@ -62,6 +91,9 @@ int		filler(t_fig *st)
 		return (-1);
 	if (!TAB)
 		create_tab(st);
+	count_padv(st);
+	if (END)
+		return (go_hard(st));
 	return (score_check(st));
 }
 
