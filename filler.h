@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 13:55:00 by adenis            #+#    #+#             */
-/*   Updated: 2017/05/05 18:12:41 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/08 16:01:43 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef	struct	s_fig
 
 int				filler(t_fig *st);
 int				score_check(t_fig *st);
-void			create_tab(t_fig *st);
+int				create_tab(t_fig *st);
 void			count_padv(t_fig *st);
 void			init_tab(t_fig *st);
 void			place_piece(t_fig *st, int x, int y);
@@ -63,6 +63,7 @@ void			fill_one(int x, int y, int i, t_fig *st);
 void			fill_neg(int x, int y, int i, t_fig *st);
 void			fill_score(t_fig *st, int i);
 
+int				go_hard(t_fig *st);
 void			last_clean(t_fig *st);
 
 void			feedback(int x, int y, t_fig *st);

@@ -6,11 +6,52 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 19:40:15 by adenis            #+#    #+#             */
-/*   Updated: 2017/05/05 18:33:08 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/08 12:34:32 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../filler.h"
+
+void	place_piece(t_fig *st, int x, int y)
+{
+	int		i;
+
+	i = 0;
+	while (i < N)
+	{
+		TAB[y + OY[i]][x + OX[i]] = 2;
+		i++;
+	}
+}
+
+int		go_hard(t_fig *st)
+{
+	int		x;
+	int		y;
+	int		in;
+
+	y = 0;
+	BX = 0;
+	BY = 0;
+	in = 0;
+	while (y + PYMAX < GYMAX)
+	{
+		x = 0;
+		while (x + PXMAX < GXMAX)
+		{
+			if (piece_in(x, y, st) && (in = 1))
+			{
+				feedback(x, y, st);
+				break ;
+			}
+			x++;
+		}
+		y++;
+	}
+	if (!in)
+		return (0);
+	return (1);
+}
 
 void	fill_one(int x, int y, int i, t_fig *st)
 {

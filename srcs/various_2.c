@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 19:36:17 by adenis            #+#    #+#             */
-/*   Updated: 2017/05/05 15:28:10 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/08 16:02:01 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void			last_clean(t_fig *st)
 		free_tab(GRID);
 	if (st->line)
 		ft_strdel(&st->line);
-	free(st);
+	if (st)
+		free(st);
 }
 
 void			count_padv(t_fig *st)
@@ -54,7 +55,7 @@ void			count_padv(t_fig *st)
 		while (x < GXMAX)
 		{
 			if (GRID[y][x] == LETTER[st->adv])
-				 i++;
+				i++;
 			x++;
 		}
 		y++;
@@ -87,29 +88,18 @@ void			init_tab(t_fig *st)
 	}
 }
 
-void			create_tab(t_fig *st)
+int			create_tab(t_fig *st)
 {
 	int		i;
 
 	i = 0;
 	if (!(TAB = (char **)malloc(sizeof(char *) * GYMAX)))
-		exit(0);
+		return (0);
 	while (i < GYMAX)
 	{
 		if (!(TAB[i] = (char *)malloc(sizeof(char) * GXMAX)))
-			exit(0);
+			return (0);
 		i++;
 	}
-}
-
-void			place_piece(t_fig *st, int x, int y)
-{
-	int		i;
-
-	i = 0;
-	while (i < N)
-	{
-		TAB[y + OY[i]][x + OX[i]] = 2;
-		i++;
-	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: adenis <adenis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:54:42 by adenis            #+#    #+#             */
-/*   Updated: 2017/05/05 18:37:01 by adenis           ###   ########.fr       */
+/*   Updated: 2017/05/08 12:30:30 by adenis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int			piece_in(int x, int y, t_fig *st)
 
 	i = -1;
 	sup = 0;
-	if (x < 0 || y < 0)
-		return (0);
 	if (y + PYMAX >= GYMAX || x + PXMAX >= GXMAX)
 		return (0);
 	while (++i < N)
 	{
+		if (x + OX[i] < 0 || y + OY[i] < 0)
+			return (0);
 		if (GRID[y + OY[i]][x + OX[i]] == LETTER[st->adv])
 			return (0);
 		if (GRID[y + OY[i]][x + OX[i]] == LETTER[st->player])
@@ -74,7 +74,6 @@ void		feedback(int x, int y, t_fig *st)
 	ft_putnbr(x);
 	ft_putchar('\n');
 	clean(st);
-	ft_fprintf(2, "\nMERCADI\n");
 }
 
 t_fig		*st_new(void)
